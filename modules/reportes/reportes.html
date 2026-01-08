@@ -1,0 +1,57 @@
+<section class="reportes">
+  <header class="rep__header">
+    <div>
+      <h1>Reportes</h1>
+      <p class="muted">Reportes consistentes (por producto / concepto). Evita diferencias entre historial y reportes.</p>
+    </div>
+  </header>
+
+  <div class="rep__controls card">
+    <div class="card__head">
+      <h2 class="h2">Filtros</h2>
+      <div class="filters">
+        <select id="r-type" class="input">
+          <option value="general">General</option>
+          <option value="productos">Por producto (desglosado)</option>
+          <option value="categoria">Por categoría</option>
+          <option value="membresias">Membresías</option>
+        </select>
+        <input id="r-from" class="input" type="date">
+        <input id="r-to" class="input" type="date">
+        <select id="r-category" class="input" style="display:none;"></select>
+        <button class="btn btn--ghost" type="button" id="r-apply">Aplicar</button>
+        <button class="btn btn--ghost" type="button" id="r-reset">Restablecer</button>
+        <button class="btn btn--ghost" type="button" id="r-exportCsv">Excel</button>
+        <button class="btn btn--ghost" type="button" id="r-exportPdf">PDF</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="rep__stats" id="r-stats"></div>
+  </div>
+
+  <div class="rep__grid">
+    <div class="card">
+      <div class="card__head">
+        <h2 class="h2" id="r-title">Detalle</h2>
+        <div class="muted small" id="r-subtitle"></div>
+      </div>
+      <div class="divider"></div>
+      <div class="repTableWrap">
+        <table class="repTable" id="r-table">
+          <thead id="r-thead"></thead>
+          <tbody id="r-tbody"></tbody>
+        </table>
+      </div>
+      <div class="muted" id="r-empty" style="display:none;">Sin datos.</div>
+    </div>
+
+    <div class="card">
+      <div class="card__head">
+        <h2 class="h2">Vista rápida</h2>
+        <div class="muted small">Totales por tipo</div>
+      </div>
+      <div class="divider"></div>
+      <div id="r-side" class="repSide"></div>
+    </div>
+  </div>
+</section>

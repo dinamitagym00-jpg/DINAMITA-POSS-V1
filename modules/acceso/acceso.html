@@ -1,0 +1,74 @@
+<div class="dp-mod dp-acceso">
+  <div class="dp-modHead">
+    <div>
+      <h2>Acceso</h2>
+      <div class="dp-sub">Control de entradas por QR / Código (modo recepción)</div>
+    </div>
+    <div class="dp-row dp-gap">
+      <button class="dp-btn dp-btnGhost" id="a-clear">Limpiar</button>
+      <button class="dp-btn" id="a-toggleMode">Modo Acceso: OFF</button>
+    </div>
+  </div>
+
+  <div class="dp-grid2">
+    <section class="dp-card">
+      <h3>Escaneo</h3>
+      <div class="dp-row dp-gap dp-wrap">
+        <div class="dp-field dp-grow">
+          <label>Escanea QR / Código o escribe ID / Nombre</label>
+          <input id="a-scan" class="dp-input dp-inputBig" placeholder="Ej. C001 o Juan Pérez" autocomplete="off" />
+          <div class="dp-hint">Tip: El lector de código funciona como teclado. Escanea y listo.</div>
+        </div>
+        <div class="dp-field">
+          <label>Anti-passback</label>
+          <div class="dp-row dp-gap">
+            <input id="a-apm" class="dp-input" type="number" min="0" step="1" style="width:110px" />
+            <span class="dp-hint" style="align-self:center">min</span>
+          </div>
+          <div class="dp-hint">0 = desactivado</div>
+        </div>
+      </div>
+
+      <div id="a-status" class="dp-accessStatus dp-accessIdle">
+        <div class="dp-accessTitle">Listo para escanear</div>
+        <div class="dp-accessMeta">Laptop: ideal para recepción • Tablet: también funciona</div>
+      </div>
+
+      <div class="dp-row dp-gap dp-wrap" style="margin-top:12px">
+        <button class="dp-btn" id="a-check">Validar</button>
+        <button class="dp-btn dp-btnGhost" id="a-renew" disabled>Renovar</button>
+        <button class="dp-btn dp-btnGhost" id="a-print" disabled>Imprimir credencial</button>
+      </div>
+
+      <div class="dp-divider"></div>
+
+      <h3>Último acceso</h3>
+      <div id="a-last" class="dp-kv"></div>
+    </section>
+
+    <section class="dp-card">
+      <div class="dp-row dp-between dp-wrap">
+        <h3>Registro de accesos</h3>
+        <div class="dp-row dp-gap">
+          <input id="a-filter" class="dp-input" placeholder="Buscar..." style="width:220px" />
+          <button class="dp-btn dp-btnGhost" id="a-export">Exportar CSV</button>
+        </div>
+      </div>
+      <div class="dp-tableWrap">
+        <table class="dp-table" id="a-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Cliente</th>
+              <th>Resultado</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="dp-hint">El registro se guarda en el dispositivo (IndexedDB). Para sincronizar entre laptop/tablet, después conectamos Firebase.</div>
+    </section>
+  </div>
+</div>

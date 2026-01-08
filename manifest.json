@@ -1,0 +1,22 @@
+{
+  "name": "Dinamita POS v0",
+  "short_name": "DinamitaPOS",
+  "description": "Punto de venta y control de acceso (v0) - pruebas de campo.",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c00000",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

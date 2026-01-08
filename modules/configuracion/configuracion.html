@@ -1,0 +1,103 @@
+<section class="config">
+  <header class="cfg__header">
+    <div>
+      <h1>Configuración</h1>
+      <p class="muted">Datos del negocio, apariencia y ticket.</p>
+    </div>
+  </header>
+
+  <div class="cfg__grid">
+    <div class="card">
+      <div class="card__head"><h2 class="h2">Datos del negocio</h2></div>
+      <div class="divider"></div>
+
+      <div class="cfg__form">
+        <div class="field">
+          <label>Logo (se usa en menú / ticket / credencial)</label>
+          <input id="cfg-logo" type="file" accept="image/*" class="input">
+          <div class="cfgLogoRow">
+            <img id="cfg-logoPreview" class="cfgLogoPreview" alt="Logo preview">
+            <button class="btn btn--ghost" type="button" id="cfg-logoClear">Quitar logo</button>
+          </div>
+        </div>
+
+        <div class="field"><label>Nombre</label><input id="cfg-name" class="input" placeholder="DINÁMITA GYM"></div>
+        <div class="field"><label>Dirección</label><input id="cfg-address" class="input" placeholder="Dirección"></div>
+        <div class="field"><label>Teléfono</label><input id="cfg-phone" class="input" placeholder="Teléfono"></div>
+        <div class="field"><label>Email</label><input id="cfg-email" class="input" placeholder="Email"></div>
+        <div class="field"><label>Redes</label><input id="cfg-social" class="input" placeholder="Facebook / Instagram"></div>
+
+        <div class="rowBtns">
+          <button class="btn" type="button" id="cfg-saveBusiness">Guardar</button>
+          <button class="btn btn--ghost" type="button" id="cfg-resetBusiness">Restablecer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__head"><h2 class="h2">Apariencia</h2></div>
+      <div class="divider"></div>
+
+      <div class="cfg__form">
+        <div class="cfgColors">
+          <div class="field"><label>Fondo</label><input id="cfg-bg" type="color" class="input"></div>
+          <div class="field"><label>Panel</label><input id="cfg-panel" type="color" class="input"></div>
+          <div class="field"><label>Color primario</label><input id="cfg-primary" type="color" class="input"></div>
+          <div class="field"><label>Texto</label><input id="cfg-text" type="color" class="input"></div>
+        </div>
+
+        <div class="cfgPalette">
+          <button class="pillBtn" type="button" data-palette="dinamita">Dinamita</button>
+          <button class="pillBtn" type="button" data-palette="claro">Claro</button>
+          <button class="pillBtn" type="button" data-palette="oscuro">Oscuro</button>
+        </div>
+
+        <div class="rowBtns">
+          <button class="btn" type="button" id="cfg-saveAppearance">Guardar</button>
+          <button class="btn btn--ghost" type="button" id="cfg-resetAppearance">Restablecer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__head"><h2 class="h2">Ticket</h2></div>
+      <div class="divider"></div>
+
+      <div class="cfg__form">
+        <div class="field">
+          <label>IVA (default)</label>
+          <input id="cfg-iva" type="number" min="0" max="100" step="1" class="input" value="0">
+          <div class="muted small">Por defecto 0. Puedes cambiarlo si algún día lo necesitas.</div>
+        </div>
+
+        <div class="field">
+          <label>Mensaje del ticket</label>
+          <input id="cfg-message" class="input" placeholder="Gracias por tu compra en Dinamita Gym 💥">
+        </div>
+
+        <div class="rowBtns">
+          <button class="btn" type="button" id="cfg-saveTicket">Guardar</button>
+          <button class="btn btn--ghost" type="button" id="cfg-resetTicket">Restablecer</button>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <h2>Respaldo</h2>
+      <div class="cfg__form">
+        <div class="muted small" style="margin-bottom:10px;">
+          Exporta o importa un archivo JSON con todos tus datos (ventas, inventario, bodega, clientes, membresías y configuración).
+        </div>
+
+        <div class="backupRow">
+          <button class="btn" type="button" id="cfg-exportBackup">Exportar respaldo</button>
+
+          <input id="cfg-importFile" type="file" accept="application/json" style="display:none;" />
+          <button class="btn btn--ghost" type="button" id="cfg-importBackup">Importar respaldo</button>
+        </div>
+
+        <div class="muted small" id="cfg-backupStatus"></div>
+      </div>
+
+    </div>
+  </div>
+</section>

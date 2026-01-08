@@ -1,0 +1,187 @@
+/* Dinamita POS v0 - Estilo general
+   Versión: v0.1.0
+   Fecha: 2025-12-15
+*/
+:root{
+  --dp-red:#c00000;
+  --dp-bg:#ffffff;
+  --dp-panel:#ffffff;
+  --dp-text:#111;
+  --dp-muted:#777;
+  --dp-border:#e6e6e6;
+}
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: var(--dp-bg);
+  color: var(--dp-text);
+}
+#app{ display:flex; min-height:100vh; }
+#menu{
+  width:240px;
+  background: var(--dp-panel);
+  border-right:1px solid var(--dp-border);
+  padding:12px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  box-sizing:border-box;
+}
+#menu h2{
+  margin:0 0 10px 0;
+  color: var(--dp-red);
+  font-size:18px;
+}
+#menu nav{ display:flex; flex-direction:column; gap:8px; }
+#menu button{
+  width:100%;
+  padding:10px 12px;
+  background: var(--dp-red);
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:800;
+  text-align:left;
+}
+#menu button:hover{ opacity:.95; }
+#content{
+  flex:1;
+  padding:18px;
+  background: var(--dp-bg);
+  box-sizing:border-box;
+}
+.brand{ display:flex; align-items:center; gap:10px; padding:14px 12px; border-bottom:1px solid var(--dp-border); background: var(--dp-panel); }
+.brand__logo{ width:34px; height:34px; object-fit:contain; border-radius:8px; border:1px solid var(--dp-border); background:#fff; display:none; }
+.brand__name{ font-weight:900; }
+
+
+/* --- Menú con logo + hamburguesa (Dinamita) --- */
+.dp-menuTop{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.dp-menuToggle{
+  width:42px;
+  height:42px;
+  border:1px solid var(--dp-border);
+  background:#fff;
+  border-radius:12px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.dp-menuToggle:hover{ background:#fafafa; }
+.dp-ham{
+  width:18px;
+  height:12px;
+  position:relative;
+  display:block;
+}
+.dp-ham::before,.dp-ham::after,.dp-ham span{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  height:2px;
+  background: var(--dp-red);
+  border-radius:2px;
+}
+.dp-ham::before{ top:0; }
+.dp-ham span{ top:5px; }
+.dp-ham::after{ bottom:0; }
+
+.dp-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.dp-brandLogoWrap{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  border:1px solid var(--dp-border);
+  overflow:hidden;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#dp-menuLogo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
+}
+#dp-menuLogoFallback{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  color: var(--dp-red);
+}
+.dp-brandText{ min-width:0; }
+#dp-menuName{
+  font-weight:900;
+  color:#111;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:140px;
+}
+.dp-brandSub{
+  color: var(--dp-muted);
+  font-size:12px;
+  margin-top:2px;
+}
+
+.dp-nav{ display:flex; flex-direction:column; gap:8px; }
+.dp-navBtn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  background: var(--dp-red);
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:900;
+  text-align:left;
+}
+.dp-navBtn .dp-navIco{
+  width:22px;
+  height:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 22px;
+}
+.dp-navBtn svg{
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:#fff;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.dp-navBtn:hover{ opacity:.95; }
+.dp-navBtn.active{
+  outline: 2px solid rgba(192,0,0,.25);
+  box-shadow: 0 0 0 3px rgba(192,0,0,.12);
+}
+
+/* Colapsado */
+body.dp-menu-collapsed #menu{ width:76px; padding:12px 10px; }
+body.dp-menu-collapsed .dp-brandText{ display:none; }
+body.dp-menu-collapsed .dp-navBtn{ justify-content:center; padding:10px; }
+body.dp-menu-collapsed .dp-navLbl{ display:none; }

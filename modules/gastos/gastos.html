@@ -1,0 +1,132 @@
+<section class="gastos">
+  <header class="gastos__header">
+    <div>
+      <h1>Gastos</h1>
+      <p class="muted">Registra egresos del negocio y consulta el historial.</p>
+    </div>
+    <div class="gastos__totals">
+      <div class="kpi">
+        <div class="kpi__k">Hoy</div>
+        <div class="kpi__v" id="g-kpi-hoy">$0</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__k">Mes</div>
+        <div class="kpi__v" id="g-kpi-mes">$0</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi__k">Total</div>
+        <div class="kpi__v" id="g-kpi-total">$0</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="g-grid">
+    <div class="card">
+      <h3>Registrar gasto</h3>
+
+      <div class="form">
+        <div class="field">
+          <label>Fecha</label>
+          <input type="date" id="g-fecha">
+        </div>
+
+        <div class="field">
+          <label>Categoría</label>
+          <div class="row">
+            <select id="g-categoria"></select>
+            <button class="btn btn--ghost btn--mini" id="g-catManage" type="button">+ / −</button>
+          </div>
+          <div class="hint">Puedes editar categorías en Configuración → Respaldo o aquí.</div>
+        </div>
+
+        <div class="field">
+          <label>Descripción</label>
+          <input type="text" id="g-desc" placeholder="Ej. Pago de luz, renta, compra de insumos">
+        </div>
+
+        <div class="field">
+          <label>Monto (MXN)</label>
+          <input type="number" id="g-monto" min="0" step="0.01" placeholder="0.00">
+        </div>
+
+        <div class="field">
+          <label>Forma de pago</label>
+          <select id="g-pago">
+            <option value="efectivo">Efectivo</option>
+            <option value="tarjeta">Tarjeta</option>
+            <option value="transferencia">Transferencia</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Notas</label>
+          <textarea id="g-notas" rows="3" placeholder="Opcional"></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn--ghost" id="g-limpiar" type="button">Limpiar</button>
+          <button class="btn" id="g-guardar" type="button">Guardar gasto</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Historial</h3>
+
+      <div class="filters">
+        <input id="g-q" type="search" placeholder="Buscar (descripción/categoría)">
+        <div class="row">
+          <input id="g-desde" type="date">
+          <input id="g-hasta" type="date">
+          <button class="btn btn--ghost btn--mini" id="g-aplicar" type="button">Aplicar</button>
+          <button class="btn btn--ghost btn--mini" id="g-reset" type="button">Restablecer</button>
+          <button class="btn btn--mini" id="g-xls" type="button">Excel</button>
+          <button class="btn btn--mini btn--ghost" id="g-pdf" type="button">PDF</button>
+        </div>
+      </div>
+
+      <div class="tableWrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th>Pago</th>
+              <th class="right">Monto</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="g-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="foot">
+        <div class="muted" id="g-count">0 registros</div>
+        <div class="sum">
+          <span>Total filtrado:</span>
+          <strong id="g-sum">$0</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal categorías -->
+  <div class="modal" id="g-catModal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__card">
+      <div class="modal__head">
+        <strong>Catálogo de categorías</strong>
+        <button class="btn btn--ghost btn--mini" data-close="1" type="button">Cerrar</button>
+      </div>
+      <div class="modal__body">
+        <div class="row">
+          <input id="g-newCat" type="text" placeholder="Nueva categoría">
+          <button class="btn btn--mini" id="g-addCat" type="button">Agregar</button>
+        </div>
+        <div class="chips" id="g-catChips"></div>
+      </div>
+    </div>
+  </div>
+</section>

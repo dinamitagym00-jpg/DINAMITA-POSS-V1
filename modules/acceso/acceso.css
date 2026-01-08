@@ -1,0 +1,20 @@
+.dp-acceso .dp-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width: 980px){.dp-acceso .dp-grid2{grid-template-columns:1fr}}
+.dp-acceso .dp-inputBig{font-size:18px;font-weight:800;letter-spacing:.3px;padding:12px 14px}
+.dp-accessStatus{border-radius:14px;padding:16px;margin-top:10px;border:2px solid rgba(0,0,0,.12);background:#fff}
+.dp-accessTitle{font-size:20px;font-weight:900}
+.dp-accessMeta{margin-top:6px;opacity:.85}
+.dp-accessIdle{border-color:rgba(0,0,0,.12)}
+.dp-accessOk{border-color:rgba(0,180,90,.35);background:rgba(0,180,90,.06)}
+.dp-accessWarn{border-color:rgba(255,140,0,.4);background:rgba(255,140,0,.06)}
+.dp-accessBad{border-color:rgba(220,50,50,.35);background:rgba(220,50,50,.06)}
+.dp-kv{display:flex;flex-direction:column;gap:8px}
+.dp-kvRow{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed rgba(0,0,0,.12);padding-bottom:6px}
+.dp-kvK{opacity:.7}
+.dp-kvV{text-align:right}
+.dp-badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-weight:900;font-size:12px;letter-spacing:.4px}
+.dp-badgeOk{background:rgba(0,180,90,.12);border:1px solid rgba(0,180,90,.35)}
+.dp-badgeWarn{background:rgba(255,140,0,.12);border:1px solid rgba(255,140,0,.4)}
+.dp-badgeBad{background:rgba(220,50,50,.12);border:1px solid rgba(220,50,50,.35)}
+/* Modo Acceso: opcional, oculta/inhabilita navegación con PIN (visual) */
+body.dp-accessMode .dp-nav .dp-navBtn{opacity:.55}

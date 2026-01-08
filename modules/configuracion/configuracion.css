@@ -1,0 +1,14 @@
+/* Configuración */
+.cfg__grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:14px; }
+@media(max-width: 1100px){ .cfg__grid{ grid-template-columns:1fr; } }
+.cfg__form{ display:flex; flex-direction:column; gap:10px; }
+.rowBtns{ display:flex; gap:10px; flex-wrap:wrap; }
+.cfgColors{ display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; }
+.cfgPalette{ display:flex; gap:8px; flex-wrap:wrap; }
+.pillBtn{ border:1px solid var(--dp-border); background:#fafafa; padding:6px 10px; border-radius:999px; cursor:pointer; font-weight:800; }
+.pillBtn:hover{ opacity:.95; }
+.cfgLogoRow{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+.cfgLogoPreview{ width:64px; height:64px; object-fit:contain; border:1px solid var(--dp-border); border-radius:12px; background:#fff; display:none; }
+
+
+.backupRow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }

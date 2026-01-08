@@ -1,0 +1,81 @@
+<section class="clientes">
+  <header class="clientes__header">
+    <div>
+      <h1>Clientes</h1>
+      <p class="muted">Alta y gestión de clientes. La foto se usa principalmente para Membresías.</p>
+    </div>
+  </header>
+
+  <div class="clientes__grid">
+    <div class="card">
+      <div class="card__head">
+        <h2 class="h2">Formulario</h2>
+        <div class="muted small" id="c-mode">Modo: Nuevo</div>
+      </div>
+      <div class="divider"></div>
+
+      <form id="c-form" autocomplete="off">
+        <input type="hidden" id="c-id">
+
+        <div class="row2">
+          <div class="field">
+            <label>Foto (opcional)</label>
+            <input id="c-photo" type="file" accept="image/*">
+            <div class="photoPrev">
+              <img id="c-photoPrev" alt="Foto cliente" />
+              <button class="btn btn--ghost" type="button" id="c-photoClear">Quitar foto</button>
+            </div>
+            <div class="muted small">Se guarda dentro del navegador (localStorage).</div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label>Nombre *</label>
+              <input id="c-name" type="text" placeholder="Nombre completo" required>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label>Teléfono</label>
+                <input id="c-phone" type="tel" placeholder="10 dígitos">
+              </div>
+              <div class="field">
+                <label>ID</label>
+                <input id="c-idView" type="text" placeholder="Se genera al guardar" disabled>
+              </div>
+            </div>
+            <div class="field">
+              <label>Dirección</label>
+              <input id="c-address" type="text" placeholder="Opcional">
+            </div>
+            <div class="field">
+              <label>Notas</label>
+              <input id="c-notes" type="text" placeholder="Opcional">
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn--ghost" id="c-clear">Limpiar</button>
+          <button type="submit" class="btn" id="c-save">Guardar</button>
+        </div>
+
+        <div class="muted small" id="c-status"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="card__head">
+        <h2 class="h2">Listado</h2>
+        <div class="filters">
+          <input id="c-search" class="input" placeholder="Súper buscador: nombre / teléfono / ID">
+          <button class="btn btn--ghost" type="button" id="c-exportCsv">Excel</button>
+          <button class="btn btn--ghost" type="button" id="c-exportPdf">PDF</button>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div id="c-list" class="clientList"></div>
+      <div class="muted" id="c-empty" style="display:none;">Sin clientes.</div>
+    </div>
+  </div>
+</section>

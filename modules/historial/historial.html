@@ -1,0 +1,52 @@
+<section class="historial">
+  <header class="his__header">
+    <div>
+      <h1>Historial</h1>
+      <p class="muted">Ventas y membresías en un solo lugar. Filtra por fechas, reimprime tickets y borra con reversa.</p>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="card__head">
+      <h2 class="h2">Filtros</h2>
+      <div class="filters">
+        <input id="h-search" class="input" placeholder="Buscar por ticket / cliente / producto / concepto">
+        <input id="h-from" class="input" type="date">
+        <input id="h-to" class="input" type="date">
+        <button class="btn btn--ghost" type="button" id="h-clear">Limpiar</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="his__stats" id="h-stats"></div>
+  </div>
+
+  <div class="his__grid">
+    <div class="card">
+      <div class="card__head">
+        <h2 class="h2">Listado</h2>
+        <div class="muted small">Tip: puedes buscar por “T2025…” o por nombre de cliente.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div id="h-list" class="hisList"></div>
+      <div class="muted" id="h-empty" style="display:none;">Sin resultados.</div>
+    </div>
+
+    <div class="card">
+      <div class="card__head">
+        <h2 class="h2">Ticket (previsualización)</h2>
+        <div class="muted small">Solo se imprime si lo pides.</div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="ticketBox">
+        <div class="ticketHead">
+          <strong id="h-ticketTitle">Ticket</strong>
+          <button class="btn btn--ghost" type="button" id="h-print" disabled>Imprimir</button>
+        </div>
+        <div id="h-ticketPreview" class="ticketPreview muted">Selecciona una venta para ver el ticket.</div>
+      </div>
+    </div>
+  </div>
+</section>

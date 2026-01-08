@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinamita POS v0</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+
+  <!-- Preload CSS de módulos (evita "brinco" al cambiar de sección) -->
+  <link rel="stylesheet" href="modules/dashboard/dashboard.css">
+  <link rel="stylesheet" href="modules/ventas/ventas.css">
+  <link rel="stylesheet" href="modules/acceso/acceso.css">
+  <link rel="stylesheet" href="modules/inventario/inventario.css">
+  <link rel="stylesheet" href="modules/bodega/bodega.css">
+  <link rel="stylesheet" href="modules/membresias/membresias.css">
+  <link rel="stylesheet" href="modules/clientes/clientes.css">
+  <link rel="stylesheet" href="modules/historial/historial.css">
+  <link rel="stylesheet" href="modules/reportes/reportes.css">
+  <link rel="stylesheet" href="modules/configuracion/configuracion.css">
+  <link rel="stylesheet" href="modules/gastos/gastos.css">
+  <link rel="stylesheet" href="modules/pagina/pagina.css">
+
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#c00000">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/icon-512.png">
+
+</head>
+<body>
+  <div id="app">
+    <aside id="menu">
+      <div class="dp-menuTop">
+        <button id="dp-menuToggle" class="dp-menuToggle" type="button" aria-label="Plegar menú" title="Plegar / Desplegar">
+          <span class="dp-ham"><span></span></span>
+        </button>
+        <div class="dp-brand" title="Configuración → Logo">
+          <div class="dp-brandLogoWrap" aria-hidden="true">
+            <img id="dp-menuLogo" alt="Logo" />
+            <div id="dp-menuLogoFallback">DG</div>
+          </div>
+          <div class="dp-brandText">
+            <div id="dp-menuName">Dinamita POS</div>
+            <div class="dp-brandSub">v0</div>
+          </div>
+        </div>
+      </div>
+      <nav class="dp-nav">
+        <button class="dp-navBtn" data-module="dashboard" title="Dashboard">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13.5V20h6v-6.5H4Z"/><path d="M14 4v8h6V4h-6Z"/><path d="M14 14v6h6v-6h-6Z"/><path d="M4 4v7h6V4H4Z"/></svg></span>
+          <span class="dp-navLbl">Dashboard</span>
+        </button>
+        <button class="dp-navBtn" data-module="ventas" title="Ventas">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6h14l-2 8H8L7 6Z"/><path d="M7 6 6 3H3"/><path d="M9 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/><path d="M18 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg></span>
+          <span class="dp-navLbl">Ventas</span>
+        </button>
+        <button class="dp-navBtn" data-module="acceso" title="Acceso">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M10 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 12H3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 9l-3 3 3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="15.5" cy="12" r="1.2" fill="currentColor"/>
+          </svg></span>
+          <span class="dp-navLbl">Acceso</span>
+        </button>
+        <button class="dp-navBtn" data-module="inventario" title="Inventario">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8 12 3 3 8v10l9 5 9-5V8Z"/><path d="M12 22V12"/><path d="M21 8l-9 4-9-4"/></svg></span>
+          <span class="dp-navLbl">Inventario</span>
+        </button>
+        <button class="dp-navBtn" data-module="bodega" title="Bodega">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9 12 4l9 5v11H3V9Z"/><path d="M7 20v-8h10v8"/><path d="M10 12v8"/><path d="M14 12v8"/></svg></span>
+          <span class="dp-navLbl">Bodega</span>
+        </button>
+                <button class="dp-navBtn" data-module="gastos" title="Gastos">
+          <span class="dp-navIco" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 7h16v12H4Z"/>
+              <path d="M4 10h16"/>
+              <path d="M14 14h6"/>
+              <circle cx="8.5" cy="14.5" r="1.5"/>
+            </svg>
+          </span>
+          <span class="dp-navLbl">Gastos</span>
+        </button>
+        <button class="dp-navBtn" data-module="membresias" title="Membresías">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg></span>
+          <span class="dp-navLbl">Membresías</span>
+        </button>
+        <button class="dp-navBtn" data-module="clientes" title="Clientes">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"/><path d="M4 20a8 8 0 0 1 16 0"/></svg></span>
+          <span class="dp-navLbl">Clientes</span>
+        </button>
+        <button class="dp-navBtn" data-module="historial" title="Historial">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5l3 2"/><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 3v6h6"/></svg></span>
+          <span class="dp-navLbl">Historial</span>
+        </button>
+        <button class="dp-navBtn" data-module="reportes" title="Reportes">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M7 15l3-3 3 2 5-6"/></svg></span>
+          <span class="dp-navLbl">Reportes</span>
+        </button>
+        <button class="dp-navBtn" data-module="configuracion" title="Configuración">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8.5a3.5 3.5 0 0 0 0 7Z"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.2-2-3.5-2.2.7a7.3 7.3 0 0 0-1.7-1L14.7 3h-4l-.3 2a7.3 7.3 0 0 0-1.7 1L6.5 5.3l-2 3.5 2 1.2a7 7 0 0 0 0 2l-2 1.2 2 3.5 2.2-.7a7.3 7.3 0 0 0 1.7 1l.3 2h4l.3-2a7.3 7.3 0 0 0 1.7-1l2.2.7 2-3.5-2-1.2c.07-.33.1-.66.1-1Z"/></svg></span>
+          <span class="dp-navLbl">Configuración</span>
+        </button>
+        <button class="dp-navBtn" data-module="pagina" title="Página">
+          <span class="dp-navIco"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 0 9 9"/><path d="M21 12a9 9 0 0 0-9-9"/><path d="M12 3a9 9 0 0 1 0 18"/><path d="M3 12h18"/></svg></span>
+          <span class="dp-navLbl">Página</span>
+        </button>
+      </nav>
+    </aside>
+    <main id="content"></main>
+  </div>
+
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
