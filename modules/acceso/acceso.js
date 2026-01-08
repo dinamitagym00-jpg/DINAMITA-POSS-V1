@@ -16,8 +16,13 @@
 
   // --- helpers ---
   const fmtMoney = (n)=>"$" + (Number(n||0)).toFixed(2);
-  const todayISO = ()=> new Date().toISOString().slice(0,10);
-  const nowISO = ()=> new Date().toISOString();
+
+  // IMPORTANTE: NO usar toISOString() para accesos porque eso guarda en UTC.
+  // Queremos que el registro quede con la hora LOCAL del dispositivo.
+  const pad2 = (n)=> String(n).padStart(2,'0');
+  const localDateISO = (d)=> `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+  const localTime = (d)=> `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
+  const todayISO = ()=> localDateISO(new Date());
 
   function state(){ return dpGetState(); }
 
@@ -107,12 +112,17 @@
   function logAccess({clientId, clientName, result, detail, method="qr"}){
     dpSetState(st=>{
       st.accessLogs = st.accessLogs || [];
-      const at = nowISO();
+      // Guardar con hora LOCAL (no UTC)
+      const d = new Date();
+      const date = localDateISO(d);
+      const time = localTime(d);
+      const at = `${date}T${time}`;
       st.accessLogs.unshift({
         id: dpId("A"),
+        atMs: d.getTime(),
         at,
-        date: at.slice(0,10),
-        time: at.slice(11,19),
+        date,
+        time,
         clientId: clientId || "",
         clientName: clientName || "",
         result,
@@ -255,6 +265,14 @@
     // Guardar para renovar/credencial
     sessionStorage.setItem("dp_prefill_client_id", client.id);
     renderAfterLog();
+
+    // UX: después de validar (escáner o manual) dejar listo para el siguiente pase.
+    // Mantener el input enfocado y vacío para que el lector (que funciona como teclado)
+    // pueda mandar el siguiente código sin tocar nada.
+    setTimeout(()=>{
+      scan.value = "";
+      scan.focus();
+    }, 20);
   }
 
   function renderAfterLog(){
@@ -457,6 +475,15 @@
 
           // quiet zone
           addSpan(false, 10);
+
+          // Disparar impresión automáticamente.
+          // Nota: se ejecuta dentro de la ventana de impresión para que NO se quede
+          // solo en previsualización en PWA.
+          window.onafterprint = () => { try{ window.close(); }catch(e){} };
+          // pequeño delay para asegurar render/layout antes de imprimir
+          setTimeout(() => {
+            try { window.focus(); window.print(); } catch(e) { console.error(e); }
+          }, 120);
         })();
       </script>
     </body></html>`;
