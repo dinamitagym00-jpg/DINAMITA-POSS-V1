@@ -447,17 +447,10 @@
           if(!el) return;
           el.innerHTML = "";
 
-          function addSpan(isBar, w){
-            const s = document.createElement("span");
-            s.className = isBar ? "bar" : "gap";
-            s.style.width = w + "px";
-            s.style.height = height + "px";
-            if(isBar) s.style.background = "#000";
-            el.appendChild(s);
-          }
-
-          // quiet zone
-          addSpan(false, 10);
+          // Render as SVG so it prints even when "background graphics" is disabled.
+          // (Las barras por CSS background suelen salir en blanco en el ticket.)
+          let x = 10; // quiet zone left
+          const rects = [];
 
           for(let i=0;i<value.length;i++){
             const ch = value[i];
@@ -467,23 +460,26 @@
             for(let j=0;j<pat.length;j++){
               const w = (pat[j]==="w") ? wide : narrow;
               const isBar = (j % 2 === 0);
-              addSpan(isBar, w);
+              if(isBar){
+                rects.push(`<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000"/>`);
+              }
+              x += w;
             }
             // inter-character gap (narrow space)
-            addSpan(false, narrow);
+            x += narrow;
           }
 
-          // quiet zone
-          addSpan(false, 10);
+          x += 10; // quiet zone right
+          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${x}" height="${height}" viewBox="0 0 ${x} ${height}" shape-rendering="crispEdges">${rects.join("")}</svg>`;
+          el.innerHTML = svg;
 
           // Disparar impresión automáticamente.
           // Nota: se ejecuta dentro de la ventana de impresión para que NO se quede
           // solo en previsualización en PWA.
           window.onafterprint = () => { try{ window.close(); }catch(e){} };
-          // pequeño delay para asegurar render/layout antes de imprimir
-          setTimeout(() => {
-            try { window.focus(); window.print(); } catch(e) { console.error(e); }
-          }, 120);
+          // Espera 2 frames para que el SVG renderice antes de imprimir
+          const go = () => { try{ window.focus(); window.print(); }catch(e){ console.error(e); } };
+          requestAnimationFrame(() => requestAnimationFrame(go));
         })();
       </script>
     </body></html>`;

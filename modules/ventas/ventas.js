@@ -381,11 +381,12 @@
             body{ margin:0; padding:12px; }
             .ticket{
               font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-              font-size:14px; font-weight:800; color:#111; line-height:1.35;
-              width: 280px;
+              /* Un poco más grande para que se lea mejor en 58mm */
+              font-size:16px; font-weight:800; color:#111; line-height:1.35;
+              width: 300px;
             }
             .ticket *{ font-weight:800; }
-            .t-title{ font-weight:900; text-align:center; font-size:15px; }
+            .t-title{ font-weight:900; text-align:center; font-size:17px; }
             .t-center{ text-align:center; }
             .t-row{ display:flex; justify-content:space-between; gap:10px; }
             .t-hr{ border-top:1px dashed #999; margin:8px 0; }
@@ -393,7 +394,7 @@
             .t-item{ display:flex; justify-content:space-between; gap:10px; }
             .t-item .l{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
             .t-item .r{ flex:0 0 auto; font-weight:800; }
-            .t-big{ font-size:16px; font-weight:900; }
+            .t-big{ font-size:18px; font-weight:900; }
             @media print{
               body{ padding:0; }
             }
@@ -526,7 +527,10 @@ function dpPrintHTML(html){
   doc.write(html);
   doc.close();
 
+  let printed = false;
   const tryPrint = () => {
+    if(printed) return;
+    printed = true;
     try{
       iframe.contentWindow.focus();
       // Some Android devices need a tiny delay after focus
