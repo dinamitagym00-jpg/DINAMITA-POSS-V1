@@ -479,7 +479,23 @@
           window.onafterprint = () => { try{ window.close(); }catch(e){} };
           // Espera 2 frames para que el SVG renderice antes de imprimir
           const go = () => { try{ window.focus(); window.print(); }catch(e){ console.error(e); } };
-          requestAnimationFrame(() => requestAnimationFrame(go));
+          const waitReady = () => {
+            const svg = document.querySelector('#barcode svg');
+            if(svg){
+              try{
+                const bb = svg.getBBox();
+                if(bb && bb.width>10 && bb.height>10){
+                  return requestAnimationFrame(() => requestAnimationFrame(go));
+                }
+              }catch(e){}
+              const r = svg.getBoundingClientRect();
+              if(r && r.width>10 && r.height>10){
+                return requestAnimationFrame(() => requestAnimationFrame(go));
+              }
+            }
+            setTimeout(waitReady, 120);
+          };
+          setTimeout(waitReady, 80);
         })();
       </script>
     </body></html>`;

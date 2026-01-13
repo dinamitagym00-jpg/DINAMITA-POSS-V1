@@ -377,16 +377,17 @@
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <title>Ticket ${sale.id}</title>
-          <style>
-            body{ margin:0; padding:12px; }
+          <style>@page{ size:58mm auto; margin:0; }
+
+            body{ margin:0; padding:6px; }
             .ticket{
               font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
               /* Un poco más grande para que se lea mejor en 58mm */
-              font-size:16px; font-weight:800; color:#111; line-height:1.35;
-              width: 300px;
+              font-size:18px; font-weight:800; color:#111; line-height:1.35;
+              width:58mm; max-width:58mm;
             }
             .ticket *{ font-weight:800; }
-            .t-title{ font-weight:900; text-align:center; font-size:17px; }
+            .t-title{ font-weight:900; text-align:center; font-size:20px; }
             .t-center{ text-align:center; }
             .t-row{ display:flex; justify-content:space-between; gap:10px; }
             .t-hr{ border-top:1px dashed #999; margin:8px 0; }
@@ -394,7 +395,7 @@
             .t-item{ display:flex; justify-content:space-between; gap:10px; }
             .t-item .l{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
             .t-item .r{ flex:0 0 auto; font-weight:800; }
-            .t-big{ font-size:18px; font-weight:900; }
+            .t-big{ font-size:22px; font-weight:900; }
             @media print{
               body{ padding:0; }
             }
