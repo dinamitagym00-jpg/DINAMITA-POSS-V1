@@ -377,17 +377,15 @@
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <title>Ticket ${sale.id}</title>
-          <style>@page{ size:58mm auto; margin:0; }
-
-            body{ margin:0; padding:6px; }
+          <style>
+            body{ margin:0; padding:12px; }
             .ticket{
               font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-              /* Un poco más grande para que se lea mejor en 58mm */
-              font-size:18px; font-weight:800; color:#111; line-height:1.35;
-              width:58mm; max-width:58mm;
+              font-size:14px; font-weight:800; color:#111; line-height:1.35;
+              width: 280px;
             }
             .ticket *{ font-weight:800; }
-            .t-title{ font-weight:900; text-align:center; font-size:20px; }
+            .t-title{ font-weight:900; text-align:center; font-size:15px; }
             .t-center{ text-align:center; }
             .t-row{ display:flex; justify-content:space-between; gap:10px; }
             .t-hr{ border-top:1px dashed #999; margin:8px 0; }
@@ -395,7 +393,7 @@
             .t-item{ display:flex; justify-content:space-between; gap:10px; }
             .t-item .l{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
             .t-item .r{ flex:0 0 auto; font-weight:800; }
-            .t-big{ font-size:22px; font-weight:900; }
+            .t-big{ font-size:16px; font-weight:900; }
             @media print{
               body{ padding:0; }
             }
@@ -531,21 +529,25 @@ function dpPrintHTML(html){
   let printed = false;
   const tryPrint = () => {
     if(printed) return;
-    printed = true;
     try{
+      printed = true;
       iframe.contentWindow.focus();
-      // Some Android devices need a tiny delay after focus
-      setTimeout(()=>iframe.contentWindow.print(), 50);
+      iframe.contentWindow.print();
     }catch(err){
-      console.warn("Print error", err);
+      // if it fails (some mobile browsers), allow a retry once
+      printed = false;
+      console.warn("Print failed", err);
     }
-    // Cleanup (onafterprint is unreliable on mobile)
-    setTimeout(()=>{ try{ iframe.remove(); }catch(e){} }, 2000);
   };
 
-  // Wait a bit to ensure layout is ready
-  iframe.onload = () => setTimeout(tryPrint, 200);
-  setTimeout(tryPrint, 450);
+  // Print only once when the iframe finishes loading.
+  iframe.onload = () => {
+    // small delay to ensure fonts/layout are ready
+    setTimeout(tryPrint, 80);
+  };
+
+  // Safety fallback (in case onload doesn't fire reliably)
+  setTimeout(tryPrint, 600);
 }
 
 

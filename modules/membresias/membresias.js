@@ -299,7 +299,7 @@ const lines = [
 <style>
   body{ font-family: ui-monospace, Menlo, Consolas, monospace; padding:12px; }
   .ticket{ max-width:320px; }
-  pre{ white-space:pre-wrap; font-size:12px; line-height:1.25; margin:0; }
+  pre{ white-space:pre-wrap; font-size:14px; line-height:1.25; margin:0; }
   @media print{ body{ padding:0; } }
 </style>
 </head>

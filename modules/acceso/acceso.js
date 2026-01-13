@@ -444,58 +444,65 @@
 
           const value = "*" + data + "*";
           const el = document.getElementById("barcode");
-          if(!el) return;
-          el.innerHTML = "";
+      const code = (document.getElementById("code").textContent || "").trim();
+      // CODE39 patterns: n = narrow, w = wide (bar/space alternating, starts with bar)
+      const CODE39 = {
+        "0":"nnnwwnwnn","1":"wnnwnnnnw","2":"nnwwnnnnw","3":"wnwwnnnnn","4":"nnnwwnnnw",
+        "5":"wnnwwnnnn","6":"nnwwwnnnn","7":"nnnwnnwnw","8":"wnnwnnwnn","9":"nnwwnnwnn",
+        "A":"wnnnnwnnw","B":"nnwnnwnnw","C":"wnwnnwnnn","D":"nnnnwwnnw","E":"wnnnwwnnn",
+        "F":"nnwnwwnnn","G":"nnnnnwwnw","H":"wnnnnwwnn","I":"nnwnnwwnn","J":"nnnnwwwnn",
+        "K":"wnnnnnnww","L":"nnwnnnnww","M":"wnwnnnnwn","N":"nnnnwnnww","O":"wnnnwnnwn",
+        "P":"nnwnwnnwn","Q":"nnnnnnwww","R":"wnnnnnwwn","S":"nnwnnnwwn","T":"nnnnwnwwn",
+        "U":"wwnnnnnnw","V":"nwwnnnnnw","W":"wwwnnnnnn","X":"nwnnwnnnw","Y":"wwnnwnnnn",
+        "Z":"nwwnwnnnn","-":"nwnnnnwnw",".":"wwnnnnwnn"," ":"nwwnnnwnn","$":"nwnwnwnnn",
+        "/":"nwnwnnnwn","+":"nwnnnwnwn","%":"nnnwnwnwn","*":"nwnnwnwnn"
+      };
 
-          // Render as SVG so it prints even when "background graphics" is disabled.
-          // (Las barras por CSS background suelen salir en blanco en el ticket.)
-          let x = 10; // quiet zone left
-          const rects = [];
+      const bits = ("*" + code + "*").toUpperCase();
+      // Render as SVG rectangles so it prints even with "background graphics" off.
+      const svgNS = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(svgNS, "svg");
+      const h = 60;
+      svg.setAttribute("height", String(h));
+      svg.setAttribute("aria-label", "Código de barras");
+      svg.setAttribute("role", "img");
 
-          for(let i=0;i<value.length;i++){
-            const ch = value[i];
-            const pat = patterns[ch];
-            if(!pat){ continue; }
-            // pattern alternates bar/space, starting with bar
-            for(let j=0;j<pat.length;j++){
-              const w = (pat[j]==="w") ? wide : narrow;
-              const isBar = (j % 2 === 0);
-              if(isBar){
-                rects.push(`<rect x="${x}" y="0" width="${w}" height="${height}" fill="#000"/>`);
-              }
-              x += w;
-            }
-            // inter-character gap (narrow space)
-            x += narrow;
+      const narrow = 2;
+      const wide = 5;
+      let x = 0;
+
+      for (const ch of bits) {
+        const pat = CODE39[ch] || CODE39[" "];
+        for (let i = 0; i < pat.length; i++) {
+          const w = (pat[i] === "w") ? wide : narrow;
+          if (i % 2 === 0) {
+            const r = document.createElementNS(svgNS, "rect");
+            r.setAttribute("x", String(x));
+            r.setAttribute("y", "0");
+            r.setAttribute("width", String(w));
+            r.setAttribute("height", String(h));
+            r.setAttribute("fill", "#000");
+            svg.appendChild(r);
           }
+          x += w;
+        }
+        // Inter-character gap (narrow white space)
+        x += narrow;
+      }
 
-          x += 10; // quiet zone right
-          const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${x}" height="${height}" viewBox="0 0 ${x} ${height}" shape-rendering="crispEdges">${rects.join("")}</svg>`;
-          el.innerHTML = svg;
+      svg.setAttribute("width", String(x));
+      svg.setAttribute("viewBox", `0 0 ${x} ${h}`);
+      el.innerHTML = "";
+      el.appendChild(svg);
 
-          // Disparar impresión automáticamente.
+      // Disparar impresión automáticamente.
           // Nota: se ejecuta dentro de la ventana de impresión para que NO se quede
           // solo en previsualización en PWA.
           window.onafterprint = () => { try{ window.close(); }catch(e){} };
-          // Espera 2 frames para que el SVG renderice antes de imprimir
-          const go = () => { try{ window.focus(); window.print(); }catch(e){ console.error(e); } };
-          const waitReady = () => {
-            const svg = document.querySelector('#barcode svg');
-            if(svg){
-              try{
-                const bb = svg.getBBox();
-                if(bb && bb.width>10 && bb.height>10){
-                  return requestAnimationFrame(() => requestAnimationFrame(go));
-                }
-              }catch(e){}
-              const r = svg.getBoundingClientRect();
-              if(r && r.width>10 && r.height>10){
-                return requestAnimationFrame(() => requestAnimationFrame(go));
-              }
-            }
-            setTimeout(waitReady, 120);
-          };
-          setTimeout(waitReady, 80);
+          // pequeño delay para asegurar render/layout antes de imprimir
+          setTimeout(() => {
+            try { window.focus(); window.print(); } catch(e) { console.error(e); }
+          }, 120);
         })();
       </script>
     </body></html>`;
